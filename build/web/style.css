@@ -1,0 +1,29 @@
+body {
+    font-family: Calibri;
+}
+
+.red{color: red;}
+
+.box {
+    width: 250px;
+    display: block;
+    background-color: #fbfbfb;
+    border-radius: 2px;
+    padding: 0px 10px 30px 10px;
+    margin: 15px auto;
+    border: 1px solid #cecece;
+}
+
+input[type="text"], 
+input[type="password"] {
+    width: 160px;
+}
+
+#newUser {
+    display: none;
+}
+
+.finder label {
+    margin: 10px 0;
+    display: block;
+}
