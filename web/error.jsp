@@ -8,12 +8,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-            <link href="style.css" rel="stylesheet" type="text/css" />
-            <title>Error</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <title>Error</title>
     </head>
 <body>
     <h2 class="red">Datele introduse sunt invalide!</h2>
-    <a href="index.jsp">Login</a>
+    
+    <form action="${pageContext.request.contextPath}/logout" method="post">
+        <input type="submit" value="Login" />
+    </form>
 </body>
 </html>

@@ -13,7 +13,7 @@
     String username = request.getParameter("user");
     String password = request.getParameter("pass");
 
-    //System.out.println("user: " + utilizator + ", pass: " + parola);
+    session.setAttribute("user", new Login(username, password)); 
     List<Login> login = new ArrayList<Login>();
 
      try{
@@ -47,5 +47,5 @@
      if(!oke){
         out.println("Null input");
         response.sendRedirect("error.jsp");
-     } else response.sendRedirect("input.jsp");
+     } else response.sendRedirect("app/input.jsp");
 %>
