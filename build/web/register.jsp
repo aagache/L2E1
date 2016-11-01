@@ -1,3 +1,4 @@
+<%@page import="com.captcha.botdetect.web.servlet.Captcha"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List" %>
 <%@page import="java.io.*" %>
@@ -16,36 +17,45 @@
 
     <body>
     <%
-     String username = request.getParameter("user");
-     String password = request.getParameter("pass");
+        Captcha captcha = Captcha.load(request, "exampleCaptcha");
+        // validate the Captcha to check we're not dealing with a bot
+        boolean isHuman = captcha.validate(request.getParameter("captchaCode"));
+        if (!isHuman) {
+            response.sendRedirect("error.jsp");
+        } else {
+            //RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            //dispatcher.forward(request, response);
+            String username = request.getParameter("user");
+            String password = request.getParameter("pass");
 
-     List<Login> login = new ArrayList<Login>();
+            List<Login> login = new ArrayList<Login>();
 
-     try {
-        // first, read existing users
-        File file = new File("D:\\Facultate\\master Anul I\\Semestrul I\\Tehnologii Java\\2016\\L2E1\\src\\java\\user\\database.txt");
-        InputStream is = new FileInputStream(file);
-        ObjectInputStream in = new ObjectInputStream(is);
-        
-        // add the new user to the existing list
-        login = (List<Login>) in.readObject();
-        in.close();
-        is.close();
-        
-        login.add(new Login(username, password));
-        
-        // then, write to file
-        OutputStream os = new FileOutputStream(file);
-        ObjectOutputStream objOut = new ObjectOutputStream(os);
-        objOut.writeObject(login);
-        objOut.close();
-        os.close();
+            try {
+                // first, read existing users
+                File file = new File("D:\\Facultate\\master Anul I\\Semestrul I\\Tehnologii Java\\2016\\L2E1\\src\\java\\user\\database.txt");
+                InputStream is = new FileInputStream(file);
+                ObjectInputStream in = new ObjectInputStream(is);
 
-     } catch(IOException i) {
-         i.printStackTrace();
-     }
+                // add the new user to the existing list
+                login = (List<Login>) in.readObject();
+                in.close();
+                is.close();
 
-    response.sendRedirect("index.jsp");
+                login.add(new Login(username, password));
+
+                // then, write to file
+                OutputStream os = new FileOutputStream(file);
+                ObjectOutputStream objOut = new ObjectOutputStream(os);
+                objOut.writeObject(login);
+                objOut.close();
+                os.close();
+
+            } catch (IOException i) {
+                i.printStackTrace();
+            }
+
+            response.sendRedirect("index.jsp");   
+        }
     %>
     </body>
 </html>

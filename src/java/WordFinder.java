@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.io.BufferedReader;
 import static java.io.FileDescriptor.err;
 import java.io.FileInputStream;
@@ -13,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.servlet.ServletException;
@@ -45,9 +41,10 @@ public class WordFinder extends HttpServlet {
         }
     }
     
-    String getWords(String letters) throws FileNotFoundException {
+    public List<String> getWords(String letters) throws FileNotFoundException {
         String words = "", line;
         String[] strings = letters.split("");
+        List<String> wordList = new ArrayList<>();
         
         try (BufferedReader br = new BufferedReader(new FileReader("D:\\Facultate\\master Anul I\\Semestrul I\\Tehnologii Java\\2016\\L2E1\\src\\java\\en_words.txt"));
              FileWriter logFile = new FileWriter("D:\\Facultate\\master Anul I\\Semestrul I\\Tehnologii Java\\2016\\L2E1\\src\\java\\log.txt", true)) {    
@@ -65,6 +62,7 @@ public class WordFinder extends HttpServlet {
                            words += "\n" + line;
                            logFile.append(line);
                            logFile.append("\n");
+                           wordList.add(words);
                        }   
                     }   
                 }
@@ -73,17 +71,9 @@ public class WordFinder extends HttpServlet {
             words += ioe;
         }
         
-        return words;
+        return wordList;
     }
     
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -94,7 +84,7 @@ public class WordFinder extends HttpServlet {
         
         try (PrintWriter out = response.getWriter()) {
             String letters = request.getParameter("letters");    
-            words = getWords(letters);        
+            words = getWords(letters).toString();        
             
             out.println("For letters - " + letters);
             out.println("The words are: " + words);
@@ -102,14 +92,6 @@ public class WordFinder extends HttpServlet {
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -119,5 +101,4 @@ public class WordFinder extends HttpServlet {
             out.close();
         }
     }
-
 }

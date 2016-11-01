@@ -77,21 +77,33 @@
                 </table>
                     <br /> <input type="submit" value="login" name="but" />
             </form>
-            <a href="#" onclick="showRegister()">Utilizator nou?</a>
+            <a href="#" onclick="showRegister()">New user?</a>
 	</div>
 
 
 	<div id="newUser" class="box">
             <form action="register.jsp">
-                <h3>Creati un nou cont</h3>
+                <%@page import="com.captcha.botdetect.web.servlet.Captcha"%>
+                
+                <h3>Create a new account</h3>
                 <table>
                     <tr>
-                            <td>Username:</td>
-                            <td><input type="text" name="user" /></td>
+                        <%  Captcha captcha = Captcha.load(request, "exampleCaptcha");
+                            captcha.setUserInputID("captchaCode");
+
+                            String captchaHtml = captcha.getHtml();
+                            out.write(captchaHtml);
+                        %>
+                        <td>Captcha:</td>
+                        <td><input id="captchaCode" type="text" name="captchaCode" /></td>
                     </tr>
                     <tr>
-                            <td>Password:</td>
-                            <td><input type="password" name="pass" /></td>
+                        <td>Username:</td>
+                        <td><input type="text" name="user" /></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input type="password" name="pass" /></td>
                     </tr>
                 </table>
                 <br /> <input type="submit" value="create user" name="but" />

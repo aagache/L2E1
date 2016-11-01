@@ -5,7 +5,7 @@ body {
 .red{color: red;}
 
 .box {
-    width: 250px;
+    width: 280px;
     display: block;
     background-color: #fbfbfb;
     border-radius: 2px;
@@ -16,7 +16,7 @@ body {
 
 input[type="text"], 
 input[type="password"] {
-    width: 160px;
+    width: 190px;
 }
 
 #newUser {

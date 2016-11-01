@@ -19,7 +19,7 @@
         </form>
         
         <div class="box">
-            <form action="http://localhost:8080/L2E1/WordFinder" class="finder">
+            <form action="http://localhost:8080/L2E1/WordFinderServlet" class="finder" method="get">
                 <label>Letters:</label>
                 <input name="letters"/>
                 <button type="submit">Submit</button>

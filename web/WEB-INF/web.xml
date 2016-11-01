@@ -8,6 +8,14 @@
         <servlet-name>WordFinder</servlet-name>
         <url-pattern>/WordFinder</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>WordFinderServlet</servlet-name>
+        <servlet-class>WordFinderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WordFinderServlet</servlet-name>
+        <url-pattern>/WordFinderServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -21,4 +29,12 @@
         <filter-name>loginFilter</filter-name>
         <url-pattern>/app/*</url-pattern>
     </filter-mapping>
+    <servlet>
+        <servlet-name>BotDetect Captcha</servlet-name>
+        <servlet-class>com.captcha.botdetect.web.servlet.CaptchaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BotDetect Captcha</servlet-name>
+        <url-pattern>/botdetectcaptcha</url-pattern>
+    </servlet-mapping>
 </web-app>
