@@ -41,10 +41,10 @@ public class LoginFilter implements Filter {
         
         System.out.println("user: " + session.getAttribute("user"));
         
-        if (session == null || session.getAttribute("user") == null) { // change "user" for the session attribute you have defined
-            response.sendRedirect(request.getContextPath() + "/index.jsp"); // No logged-in user found, so redirect to login page.
+        if (session == null || session.getAttribute("user") == null) { 
+            response.sendRedirect(request.getContextPath() + "/index.jsp"); 
         } else {
-            chain.doFilter(req, res); // Logged-in user found, so just continue request.
+            chain.doFilter(req, res);
         }
     }
 
@@ -53,16 +53,4 @@ public class LoginFilter implements Filter {
         // If you have assigned any expensive resources as field of
         // this Filter class, then you could clean/close them here.
     }
-
-    //basic validation of pages that do not require authentication
-//    private boolean needsAuthentication(String url) {
-//        String[] validNonAuthenticationUrls =
-//            { "error.jsp", "index.jsp", "login.jsp", "register.jsp", "style.css" };
-//        for(String validUrl : validNonAuthenticationUrls) {
-//            if (url.endsWith(validUrl)) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
 }

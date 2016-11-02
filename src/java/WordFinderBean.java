@@ -15,6 +15,10 @@ import java.util.List;
 public class WordFinderBean implements java.io.Serializable {
     String letters;
     List<String> words = new ArrayList<String>();
+    
+    public WordFinderBean() {
+        
+    }
 
     public WordFinderBean(String letters, List<String> words) {
         this.letters = letters;

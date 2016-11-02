@@ -13,23 +13,23 @@
 <jsp:useBean id="theUser" class="user.Login" scope="session"></jsp:useBean>
 
 <%
-	String username = "";
-	String password = "";
-	
-	Cookie cookie = null;
-  	Cookie[] cookies = null;
-  
-  	cookies = request.getCookies();
-  	if( cookies != null ){
-	    for (int i = 0; i < cookies.length; i++){
-	    	cookie = cookies[i];
-	        
-	        if(cookie.getName().equals("user"))
-	        	username = cookie.getValue();
-	        if(cookie.getName().equals("pass"))
-	        	password = cookie.getValue();
-	     }
- 	}
+    String username = "";
+    String password = "";
+
+    Cookie cookie = null;
+    Cookie[] cookies = null;
+
+    cookies = request.getCookies();
+    if( cookies != null ){
+        for (int i = 0; i < cookies.length; i++){
+            cookie = cookies[i];
+
+            if(cookie.getName().equals("user"))
+                    username = cookie.getValue();
+            if(cookie.getName().equals("pass"))
+                    password = cookie.getValue();
+         }
+    }
 %>
 
 <!DOCTYPE html>
@@ -39,28 +39,7 @@
         <title>L2E1 JSP | Login</title>
         <link href="style.css" rel="stylesheet" type="text/css" />
     </head>
-    <body>        
-        <%         
-        int pageCode = 0;
-        
-        switch(pageCode) {
-            case 1: response.sendRedirect("error.jsp");
-                break;
-            case 2: response.sendRedirect("index.jsp");
-                break;
-            case 3: response.sendRedirect("input.jsp");
-                break;
-            case 4: response.sendRedirect("login.jsp");    
-                break;
-            case 5: response.sendRedirect("register.jsp");
-                break;
-            case 6: response.sendRedirect("result.jsp");
-                break;
-//            default: response.sendRedirect("error.jsp");    
-//                break;
-        }
-        %>
-        
+    <body>                
         <div id="login" class="box center">
             <h3>Login</h3>
             <form action="login.jsp">

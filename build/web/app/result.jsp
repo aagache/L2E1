@@ -8,8 +8,12 @@
         <title>Result</title>
     </head>
 <body>
-    <a href="login.jsp">Login</a> 
-    <h2>Word list:</h2>  
+    
+    <form action="${pageContext.request.contextPath}/logout" method="post">
+        <input type="submit" value="Logout" />
+    </form>
+        
+    <h2>Result</h2>  
     
 </body>
 </html>
