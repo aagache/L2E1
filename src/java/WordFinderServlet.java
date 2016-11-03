@@ -1,3 +1,4 @@
+import wf.WordFinderBean;
 import java.io.BufferedReader;
 import static java.io.FileDescriptor.err;
 import java.io.FileInputStream;
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -83,6 +85,10 @@ public class WordFinderServlet extends HttpServlet {
 
         WordFinderBean wf = new WordFinderBean(letters, wordsList);
         response.setContentType("text/plain");
+
+        HttpSession session = request.getSession();
+        session.setAttribute("wf", wf);
+        
         request.setAttribute("bean", wf);
         request.getRequestDispatcher("/app/result.jsp").forward(request, response);
     }
