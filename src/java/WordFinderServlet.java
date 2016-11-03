@@ -88,8 +88,6 @@ public class WordFinderServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("wf", wf);
-        
-        request.setAttribute("bean", wf);
         request.getRequestDispatcher("/app/result.jsp").forward(request, response);
     }
 

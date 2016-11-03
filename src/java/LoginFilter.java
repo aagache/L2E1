@@ -1,5 +1,6 @@
-
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -10,12 +11,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
@@ -29,6 +24,7 @@ public class LoginFilter implements Filter {
         // If you have any <init-param> in web.xml, then you could get them
         // here by config.getInitParameter("name") and assign it as field.
     }
+    
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
@@ -38,13 +34,26 @@ public class LoginFilter implements Filter {
         HttpSession session = request.getSession(false);
 
         String requestPath = request.getRequestURI();
-        
-        System.out.println("user: " + session.getAttribute("user"));
+        System.out.println(requestPath);
         
         if (session == null || session.getAttribute("user") == null) { 
             response.sendRedirect(request.getContextPath() + "/index.jsp"); 
         } else {
-            chain.doFilter(req, res);
+            CharResponseWrapper wrapper = new CharResponseWrapper( (HttpServletResponse)response );
+            chain.doFilter(req, wrapper);           
+        
+            //Get the dynamically generated content from the decorator
+            String content = wrapper.toString();
+
+            // Modify the content
+            StringWriter sw = new StringWriter();
+            sw.write(content);
+            sw.write("<h2>Thank you for using our WordFinder service</h2>");
+
+            //Send the modified content using the original response
+            PrintWriter out = response.getWriter();
+            out.write(sw.toString());
+            //out.close();
         }
     }
 
